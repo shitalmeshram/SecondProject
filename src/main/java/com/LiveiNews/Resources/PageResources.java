@@ -1,6 +1,8 @@
 package com.LiveiNews.Resources;
 
+
 import com.LiveiNews.Pages.HomePage;
+import com.LiveiNews.Pages.MailinatorPage;
 import com.LiveiNews.Pages.RegistrationPage;
 import org.openqa.selenium.WebDriver;
 
@@ -11,11 +13,16 @@ public class PageResources {
      WebDriver driver;
       HomePage homePage;
      RegistrationPage registrationPage;
+    MailinatorPage mailinatorPage;
+
+
+
 
     public PageResources(WebDriver driver){
         this.driver=driver;
         homePage=new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
+        mailinatorPage = new MailinatorPage(driver);
     }
 
     public HomePage getHomePage() {
@@ -25,5 +32,10 @@ public class PageResources {
     public RegistrationPage getRegistrationPage() {
         return registrationPage;
     }
+
+    public MailinatorPage getMailinatorPage() {
+        return mailinatorPage;
+    }
+
 
 }

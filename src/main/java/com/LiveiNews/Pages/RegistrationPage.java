@@ -1,5 +1,6 @@
 package com.LiveiNews.Pages;
 
+import com.sun.org.apache.bcel.internal.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebElement;
  */
 public class RegistrationPage {
      WebDriver driver;
+
     public RegistrationPage(WebDriver driver){
         this.driver=driver;
     }
@@ -44,6 +46,54 @@ public class RegistrationPage {
     public WebElement submitBtn(){
         return driver.findElement(By.xpath(".//*[@id='registration-form']/p[2]/input"));
     }
+    //For Media
+
+    public WebElement dropDown()    {
+        return driver.findElement(By.id("i-e-type"));
+
+    }
+  public WebElement firstName(){
+        return driver.findElement(By.name("first_name"));
+  }
+    public WebElement lastName(){
+        return driver.findElement(By.name("last_name"));
+    }
+    public WebElement txtAddress(){
+        return driver.findElement(By.name("address"));
+    }
+    public WebElement txtPhone(){
+        return driver.findElement(By.name("phone"));
+    }
+    public WebElement txtZipCode(){
+        return driver.findElement(By.name("zipcode"));
+    }
+    public WebElement selectCountry(){
+        return driver.findElement(By.name("country"));
+    }
+    public WebElement selectState(){
+        return driver.findElement(By.name("state"));
+    }
+
+    public WebElement selectCity(){
+        return driver.findElement(By.name("city"));
+    }
+    public WebElement txtCompanyName(){
+        return driver.findElement(By.name("company_name"));
+    }
+    public WebElement txtEIN(){
+        return driver.findElement(By.name("user_eid"));
+    }
+    public WebElement txtContact(){
+        return driver.findElement(By.name("contact"));
+    }
+    public WebElement txtMainLegalConatct(){
+        return driver.findElement(By.name("legal_contact"));
+    }
+    public WebElement txtPayPal(){
+        return driver.findElement(By.name("paypal"));
+    }
+
+
 
 
 

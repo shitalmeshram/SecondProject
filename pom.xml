@@ -49,5 +49,26 @@
           <artifactId>commons-lang3</artifactId>
           <version>RELEASE</version>
       </dependency>
+      <dependency>
+          <groupId>org.seleniumhq.selenium</groupId>
+          <artifactId>selenium-support</artifactId>
+          <version>RELEASE</version>
+      </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-support</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+      <dependency>
+          <groupId>com.LiveiNews</groupId>
+          <artifactId>SecondProject</artifactId>
+          <version>1.0-SNAPSHOT</version>
+          <scope>test</scope>
+      </dependency>
   </dependencies>
 </project>

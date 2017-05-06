@@ -2,6 +2,8 @@ package com.LiveiNews;
 
 import com.LiveiNews.Resources.DataProvider;
 import com.LiveiNews.Resources.PageResources;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -13,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by shail on 5/4/2017.
  */
-public class RegistrationTest {
+public class UserRegistrationTest {
     WebDriver driver;
    PageResources pageResources;
 
@@ -62,8 +64,37 @@ public class RegistrationTest {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         pageResources.getRegistrationPage().submitBtn().click();
 
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        //Open tab 2 using CTRL + t keys.
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+        //Open URL In 2nd tab.
+       // driver.get("https://app.getnada.com/inbox/"+dataProvider.randomEmailChars);
+        driver.navigate().to("https://www.mailinator.com");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        pageResources.getMailinatorPage().chkBox().sendKeys(dataProvider.randomEmailChars);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        pageResources.getMailinatorPage().goBtn().click();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        pageResources.getMailinatorPage().clickLink().click();
+        driver.switchTo().frame("publicshowmaildivcontent").findElement(By.xpath("html/body")).getText();
+
+
+
 
     }
+
+   /* @Test(priority = 3)
+    public void OpenActivationPageTest(){
+        pageResources = new PageResources(driver);
+        DataProvider dataProvider = new DataProvider();
+
+        //Open tab 2 using CTRL + t keys.
+        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+        //Open URL In 2nd tab.
+        driver.get("https://app.getnada.com/inbox/"+dataProvider.randomEmailChars);
+
+    }*/
 
 
 
@@ -71,7 +102,7 @@ public class RegistrationTest {
     public void afterClass() throws InterruptedException {
         //Close the browser
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-       driver.close();
-        driver.quit();
+      // driver.close();
+        //driver.quit();
     }
 }
