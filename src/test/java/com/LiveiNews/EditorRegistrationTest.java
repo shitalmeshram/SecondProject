@@ -1,6 +1,6 @@
 package com.LiveiNews;
 
-import com.LiveiNews.Pages.EditorRegistrationPage;
+//import com.LiveiNews.Pages.EditorRegistrationPage;
 import com.LiveiNews.Resources.DataProvider;
 import com.LiveiNews.Resources.PageResources;
 import org.openqa.selenium.WebDriver;

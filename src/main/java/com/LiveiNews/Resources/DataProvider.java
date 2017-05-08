@@ -9,6 +9,7 @@ public class DataProvider {
     public String randomFirstNameChars = RandomStringUtils.randomAlphabetic(7).toLowerCase();
     public String randomLastnameChars= RandomStringUtils.randomAlphabetic(7).toLowerCase();
     public String randomUsernameChars = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
+
     public String randomEmailChars = randomUsernameChars + "@mailinator.com";
 
     public String pwdChars = "123456";

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -77,32 +78,46 @@ public class UserRegistrationTest {
         pageResources.getMailinatorPage().goBtn().click();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         pageResources.getMailinatorPage().clickLink().click();
-        driver.switchTo().frame("publicshowmaildivcontent").findElement(By.xpath("html/body")).getText();
+        //out of all frames
+        driver.switchTo().defaultContent();
+        //switch to frame
+        driver.switchTo().frame("publicshowmaildivcontent");
+        //finding the link text
+        String linkText = driver.findElement(By.xpath("html/body")).getText();
+        System.out.println("Link ="+linkText);
+        //index of link text
+        int a =  linkText.indexOf("http");
+        // sub string begin index & end index
+        String subStrLink = linkText.substring(a);
+        System.out.println("String Link ="+subStrLink);
 
-
-
-
-    }
-
-   /* @Test(priority = 3)
-    public void OpenActivationPageTest(){
-        pageResources = new PageResources(driver);
-        DataProvider dataProvider = new DataProvider();
-
-        //Open tab 2 using CTRL + t keys.
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
-        //Open URL In 2nd tab.
-        driver.get("https://app.getnada.com/inbox/"+dataProvider.randomEmailChars);
+        driver.navigate().to(subStrLink);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-    }*/
+                    //Login
+        pageResources.getLoginPage().enterUname().sendKeys(dataProvider.randomUsernameChars);
+        pageResources.getLoginPage().enterPwd().sendKeys(dataProvider.pwdChars);
+        pageResources.getLoginPage().loginBtn().click();
 
+        //Logout
+        String textTitle = pageResources.getLogOutPage().titleText().getText();
+
+       //Assert.assertTrue(textTitle.trim() =="My Account".trim());
+        Assert.assertTrue(textTitle.contains("My Account"));
+        System.out.println(textTitle);
+
+        pageResources.getLogOutPage().logoutBtn().click();
+
+
+           }
 
 
     @AfterClass
     public void afterClass() throws InterruptedException {
         //Close the browser
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-      // driver.close();
-        //driver.quit();
+       driver.close();
+        driver.quit();
     }
 }
