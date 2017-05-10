@@ -14,6 +14,7 @@ public class PageResources {
       MailinatorPage mailinatorPage;
       LoginPage loginPage;
       LogOutPage logOutPage;
+      UploadVideoPage uploadVideoPage;
 
     public PageResources(WebDriver driver){
         this.driver=driver;
@@ -22,6 +23,7 @@ public class PageResources {
         mailinatorPage = new MailinatorPage(driver);
         loginPage = new LoginPage(driver);
         logOutPage = new LogOutPage(driver);
+        uploadVideoPage = new UploadVideoPage(driver);
     }
 
     public HomePage getHomePage() {
@@ -42,6 +44,10 @@ public class PageResources {
 
     public LogOutPage getLogOutPage() {
         return logOutPage;
+    }
+
+    public UploadVideoPage getUploadVideoPage() {
+        return uploadVideoPage;
     }
 
 

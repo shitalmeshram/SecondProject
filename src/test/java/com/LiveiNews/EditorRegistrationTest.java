@@ -1,11 +1,10 @@
 package com.LiveiNews;
 
 //import com.LiveiNews.Pages.EditorRegistrationPage;
-import com.LiveiNews.Resources.DataProvider;
+import com.LiveiNews.Resources.DataGenerator;
 import com.LiveiNews.Resources.PageResources;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -39,7 +38,7 @@ public class EditorRegistrationTest {
     @Test(priority = 2)
     public void EditorRegistrationPageTest() throws InterruptedException {
         pageResources = new PageResources(driver);
-        DataProvider dataProvider = new DataProvider();
+        DataGenerator dataProvider = new DataGenerator();
         Thread.sleep(5000);
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
        pageResources.getRegistrationPage().dropDown().click();
@@ -100,10 +99,6 @@ public class EditorRegistrationTest {
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         pageResources.getRegistrationPage().submitBtn().click();
-
-
-
-
 
 
     }

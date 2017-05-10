@@ -1,6 +1,6 @@
 package com.LiveiNews;
 
-import com.LiveiNews.Resources.DataProvider;
+import com.LiveiNews.Resources.DataGenerator;
 import com.LiveiNews.Resources.PageResources;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -39,7 +39,7 @@ public class UserRegistrationTest {
     @Test(priority = 2)
     public void RegisterationPageTest(){
         pageResources = new PageResources(driver);
-        DataProvider dataProvider = new DataProvider();
+        DataGenerator dataProvider = new DataGenerator();
 
         pageResources.getRegistrationPage().txtEmail().sendKeys(dataProvider.randomEmailChars);
         System.out.println("Email ="+dataProvider.randomEmailChars);

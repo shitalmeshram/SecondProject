@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 /**
  * Created by shail on 5/4/2017.
  */
-public class DataProvider {
+public class DataGenerator {
     public String randomFirstNameChars = RandomStringUtils.randomAlphabetic(7).toLowerCase();
     public String randomLastnameChars= RandomStringUtils.randomAlphabetic(7).toLowerCase();
     public String randomUsernameChars = RandomStringUtils.randomAlphanumeric(10).toLowerCase();
@@ -22,4 +22,7 @@ public class DataProvider {
     public String contactChars = "opqrst";
     public String mainContactChars = "abc123";
     public String payPalchars = "jfk@getnada.com";
+    public String titleChars = "Happy Sunny Day";
+    public String descriptionChars = "Have a happy summer";
+    public String locationChars = "Santa Clara, CA, United States";
 }
