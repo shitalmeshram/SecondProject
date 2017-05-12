@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="suiteA-Chrome">
+    <test name="TestBidQA" preserve-order="true">
+        <parameter name="userName" value="zsixtx9wgo"/>
+        <parameter name="passWord" value="123456"/>
+        <parameter name="email" value="zsixtx9wgo@mailinator.com"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="driverName" value="webdriver.chrome.driver"/>
+        <parameter name="driverLocation" value="Drivers\\chromedriver.exe"/>
+        <classes>
+            <class name="com.LiveiNews.UserLoginTest">
+
+            </class>
+
+        </classes>
+    </test>
+
+</suite>

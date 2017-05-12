@@ -2,16 +2,26 @@ package com.LiveiNews;
 
 import com.LiveiNews.Resources.DataGenerator;
 import com.LiveiNews.Resources.PageResources;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import com.LiveiNews.Pages.LiveiNewsHelper;         //always use full path
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import java.io.*;
 
 /**
  * Created by shail on 5/4/2017.
@@ -37,11 +47,85 @@ public class UserRegistrationTest {
            }
 
     @Test(priority = 2)
-    public void RegisterationPageTest(){
+    public void RegisterationPageTest() throws SAXException, ParserConfigurationException {
         pageResources = new PageResources(driver);
-        DataGenerator dataProvider = new DataGenerator();
+        HashMap hashMap = LiveiNewsHelper.UserRegisteration(pageResources,driver);
+        String email = (String) hashMap.get("Email");
+        String username =  (String) hashMap.get("Username");
+        LiveiNewsHelper.MailinatorActivation(pageResources,driver,hashMap);
 
-        pageResources.getRegistrationPage().txtEmail().sendKeys(dataProvider.randomEmailChars);
+
+       String testData = "<!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\" >\n" +
+               "<suite name=\"suiteA-Chrome\">\n" +
+               "    <test name=\"TestBidQA\" preserve-order=\"true\">\n" +
+               "        <parameter name=\"userName\" value=\""+username+"\"/>\n" +
+               "        <parameter name=\"passWord\" value=\"123456\"/>\n" +
+               "        <parameter name=\"email\" value=\""+email+"\"/>\n" +
+               "        <parameter name=\"browser\" value=\"chrome\"/>\n" +
+               "        <parameter name=\"driverName\" value=\"webdriver.chrome.driver\"/>\n" +
+               "        <parameter name=\"driverLocation\" value=\"Drivers\\\\chromedriver.exe\"/>\n" +
+               "        <classes>\n" +
+               "            <class name=\"com.LiveiNews.UserLoginTest\">\n" +
+               "\n" +
+               "            </class>\n" +
+               "\n" +
+               "        </classes>\n" +
+               "    </test>\n" +
+               "\n" +
+               "</suite>";
+
+
+       //Java File IO
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+
+        try {
+            String randomFileName= RandomStringUtils.randomAlphanumeric(10).toLowerCase();
+            String FILENAME = "D:\\SecondProject\\src\\test\\resources\\suite-files\\Suite-"+randomFileName+".xml";
+
+            String suiteName = "<suite-file path=\"suite-files/Suite-"+randomFileName+".xml\"/>";
+            fw = new FileWriter(FILENAME);
+            bw = new BufferedWriter(fw);
+            bw.write(testData);
+
+            System.out.println("Done");
+
+            DocumentBuilderFactory dbf= DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document dct=db.parse(new File("D:\\SecondProject\\src\\test\\resources\\testng.xml"));
+
+            Element dataTag = dct.getDocumentElement();
+            Element suitesTag =  (Element) dataTag.getElementsByTagName("suite-files").item(0);
+            Element newSuite = dct.createElement("suite-file");
+            newSuite.setAttribute("path","suite-files/Suite-"+randomFileName+".xml");
+          suitesTag.appendChild(newSuite);
+
+
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+
+                if (bw != null)
+                    bw.close();
+
+                if (fw != null)
+                    fw.close();
+
+            } catch (IOException ex) {
+
+                ex.printStackTrace();
+
+            }
+        }
+
+       DataGenerator dataProvider = new DataGenerator();
+
+       /* pageResources.getRegistrationPage().txtEmail().sendKeys(dataProvider.randomEmailChars);
         System.out.println("Email ="+dataProvider.randomEmailChars);
 
         pageResources.getRegistrationPage().txtPwd().sendKeys(dataProvider.pwdChars);
@@ -64,8 +148,8 @@ public class UserRegistrationTest {
 
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         pageResources.getRegistrationPage().submitBtn().click();
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+*/
+        /*driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         //Open tab 2 using CTRL + t keys.
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
@@ -93,10 +177,10 @@ public class UserRegistrationTest {
 
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
         driver.navigate().to(subStrLink);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);*/
 
                     //Login
-        pageResources.getLoginPage().enterUname().sendKeys(dataProvider.randomUsernameChars);
+       /* pageResources.getLoginPage().enterUname().sendKeys(dataProvider.randomUsernameChars);
         pageResources.getLoginPage().enterPwd().sendKeys(dataProvider.pwdChars);
         pageResources.getLoginPage().loginBtn().click();
 
@@ -108,7 +192,7 @@ public class UserRegistrationTest {
         System.out.println(textTitle);
 
         pageResources.getLogOutPage().logoutBtn().click();
-
+*/
 
            }
 
@@ -117,7 +201,7 @@ public class UserRegistrationTest {
     public void afterClass() throws InterruptedException {
         //Close the browser
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-       driver.close();
-        driver.quit();
+       //driver.close();
+        //driver.quit();
     }
 }
