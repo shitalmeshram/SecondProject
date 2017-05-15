@@ -74,14 +74,14 @@ public class UserRegistrationTest {
                "\n" +
                "</suite>";
 
-
+        //C:\Automation\SecondProject\src\test\resources\suite-files\suiteA-Chrome.xml
        //Java File IO
         BufferedWriter bw = null;
         FileWriter fw = null;
 
         try {
             String randomFileName= RandomStringUtils.randomAlphanumeric(10).toLowerCase();
-            String FILENAME = "D:\\SecondProject\\src\\test\\resources\\suite-files\\Suite-"+randomFileName+".xml";
+            String FILENAME = "C:\\Automation\\SecondProject\\src\\test\\resources\\suite-files\\Suite-"+randomFileName+".xml";
 
             String suiteName = "<suite-file path=\"suite-files/Suite-"+randomFileName+".xml\"/>";
             fw = new FileWriter(FILENAME);
@@ -89,10 +89,11 @@ public class UserRegistrationTest {
             bw.write(testData);
 
             System.out.println("Done");
+            System.out.println(randomFileName+".xml");
 
             DocumentBuilderFactory dbf= DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document dct=db.parse(new File("D:\\SecondProject\\src\\test\\resources\\testng.xml"));
+            Document dct=db.parse(new File("C:\\Automation\\SecondProject\\src\\test\\resources\\testng.xml"));
 
             Element dataTag = dct.getDocumentElement();
             Element suitesTag =  (Element) dataTag.getElementsByTagName("suite-files").item(0);

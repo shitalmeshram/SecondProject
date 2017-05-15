@@ -24,4 +24,8 @@ public class LoginPage {
     public WebElement loginBtn(){
         return driver.findElement(By.name("wp-submit"));
     }
+
+    public WebElement getLoginTitle(){
+        return driver.findElement(By.xpath("//h1[@class='page-title']"));
+    }
 }
